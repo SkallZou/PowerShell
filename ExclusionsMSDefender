@@ -1,0 +1,9 @@
+### Adding exclusions in Microsoft Defender ###
+### Using FLARE VM, to avoid all kind of troubles with Microsoft Defender, add PATH to exclusions ###
+### Run PowerShell as administrator ###
+
+$maxElement = ($env:PATH -split ";").Count
+
+for($i = 0; $i -lt $maxElement; $i++){
+  Add-MpPreference -ExclusionPath ($env:PATH -split ";")[$i]
+}
