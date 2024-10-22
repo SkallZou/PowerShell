@@ -1,0 +1,15 @@
+$regPath = New-Object System.Collections.Generic.List[System.Object]
+
+Get-ChildItem -Path 'HKLM:\SOFTWARE\Classes\CLSID\' | Select-Object -Property Name | ForEach-Object {
+    $regTemp = $_.Name.Replace("HKEY_LOCAL_MACHINE", "HKLM:")
+    Get-ChildItem -Path $regTemp | ForEach-Object{
+        if($_.Name.EndsWith('Elevation')){
+            $regPath.Add($_.Name.Replace("\Elevation","").Replace("HKEY_LOCAL_MACHINE","HKLM:"))
+        }
+    }
+}
+
+$clsidList = $regPath.ToArray()
+foreach($i in $clsidList){
+    Get-ChildItem $i
+}
